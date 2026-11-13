@@ -118,7 +118,7 @@
         </div>
 
         <div class="backup-box rj-box">
-            <svg class="rj-smiley" viewBox="0 0 100 120" width="96" height="112">
+            <svg class="rj-smiley" viewBox="0 0 100 120" width="84" height="98">
                 <path d="M51 9 C80 6, 95 27, 92 53 C90 79, 71 93, 47 92 C21 91, 6 71, 8 47 C10 23, 28 11, 51 9 Z" fill="none" stroke="#b91c1c" stroke-width="8" stroke-linecap="round"/>
                 <circle cx="32" cy="39" r="5.5" fill="#b91c1c"/>
                 <circle cx="68" cy="37" r="6" fill="#b91c1c"/>
@@ -126,10 +126,12 @@
                 <path d="M49 74 L49 91 M76 61 L76 84 M28 89 L28 112 M62 88 L62 102" stroke="#991b1b" stroke-width="4" stroke-linecap="round"/>
             </svg>
             <h2>RED JOHN // ARCHIVE</h2>
-            <p>Зашифрованный слепок базы. Без мастер-кода внутри только кровь и шум.</p>
-            <button id="export-btn" class="backup-action-btn">Скачать базу (.json)</button>
+            <p id="cloud-status">Облачный шлюз Google Диска подключён.</p>
+            <button id="cloud-save-btn" class="backup-action-btn">Сохранить на Google Диск</button>
+            <button id="cloud-load-btn" class="backup-action-btn secondary">Восстановить с Google Диска</button>
+            <button id="export-btn" class="backup-action-btn secondary">Скачать локальный файл (.json)</button>
             <label class="backup-action-btn secondary">
-                Восстановить из файла
+                Загрузить файл с телефона
                 <input type="file" id="import-input" accept=".json" hidden>
             </label>
             <button id="close-backup-btn" class="backup-exit-btn">Вернуться в калькулятор</button>
@@ -139,7 +141,7 @@
             «Тигр, тигр, жгучий страх,<br>
             Ты горишь в ночных лесах.<br>
             Чей бессмертный взор, любя,<br>
-            Создал страшного  тебя?»
+            Создал страшным так тебя?»
         </div>
     </section>
 
@@ -169,7 +171,7 @@
     </div>
 
     <script src="crypto.js?v=3"></script>
-    <script src="app.js?v=6"></script>
+    <script src="app.js?v=7"></script>
 </body>
 </html>
 <!-- END_HTML -->
