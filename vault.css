@@ -1,0 +1,385 @@
+/* === ОСНОВНОЙ СЕЙФ: КОНСУЛЬТАНТ КБР === */
+#vault-screen {
+    background-color: #0e1015;
+    background-image:
+        radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.16), transparent 60%),
+        linear-gradient(165deg, transparent 48.5%, rgba(185, 28, 28, 0.12) 49.8%, rgba(185, 28, 28, 0.12) 50.2%, transparent 51.5%);
+    color: #f8fafc;
+    overflow-y: auto;
+}
+
+.vault-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 18px;
+    background: linear-gradient(180deg, #171a21 0%, #101217 100%);
+    border-bottom: 1.5px solid rgba(217, 119, 6, 0.45);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
+}
+
+.vault-status {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.tea-badge {
+    filter: drop-shadow(0 2px 6px rgba(217, 119, 6, 0.45));
+    flex-shrink: 0;
+}
+
+#vault-mode-label {
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #f8fafc;
+}
+
+.vault-sub {
+    font-size: 0.66rem;
+    letter-spacing: 1.2px;
+    color: #f59e0b;
+    margin-top: 2px;
+}
+
+.icon-btn {
+    background: #1c2029;
+    border: 1px solid rgba(248, 250, 252, 0.25);
+    color: #f8fafc;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.vault-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 14px 16px;
+}
+
+.tab-btn {
+    padding: 12px;
+    background: #151820;
+    border: 1px solid #282d38;
+    border-radius: 9px;
+    color: #94a3b8;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.24), rgba(217, 119, 6, 0.06));
+    color: #f8fafc;
+    border-color: #d97706;
+    box-shadow: 0 0 14px rgba(217, 119, 6, 0.2);
+}
+
+#tab-notes.active {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.24), rgba(127, 29, 29, 0.08));
+    border-color: #dc2626;
+    color: #fecaca;
+    box-shadow: 0 0 14px rgba(220, 38, 38, 0.22);
+}
+
+.vault-section {
+    display: none;
+    padding: 10px 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.vault-section.active { display: flex; }
+
+.add-btn {
+    padding: 13px;
+    border-radius: 9px;
+    border: 1px dashed rgba(217, 119, 6, 0.65);
+    background: rgba(217, 119, 6, 0.1);
+    color: #fbbf24;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 700;
+    font-size: 0.86rem;
+    cursor: pointer;
+}
+
+.add-btn.detective {
+    border-color: rgba(220, 38, 38, 0.65);
+    background: rgba(220, 38, 38, 0.1);
+    color: #fca5a5;
+}
+
+/* === АРХИВ ДОСТУПА (ПАРОЛИ КБР) === */
+.cards-container, .notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.pass-card {
+    position: relative;
+    background: linear-gradient(160deg, #181b22 0%, #111318 100%);
+    border: 1px solid #2c313d;
+    border-left: 4px solid #d97706;
+    border-radius: 9px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
+}
+
+.pass-card::after {
+    content: "CBI // КЛЮЧ КОНСУЛЬТАНТА";
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.62rem;
+    color: #d97706;
+    letter-spacing: 1px;
+}
+
+.pass-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pass-service {
+    font-size: 1.04rem;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.pass-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0b0d11;
+    border: 1px solid #242833;
+    padding: 8px 11px;
+    border-radius: 7px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.88rem;
+    color: #e2e8f0;
+    user-select: text;
+}
+
+.mini-btn {
+    background: rgba(217, 119, 6, 0.2);
+    border: 1px solid rgba(217, 119, 6, 0.5);
+    color: #fbbf24;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.mini-btn.del {
+    color: #fca5a5;
+    border-color: rgba(220, 38, 38, 0.45);
+    background: rgba(220, 38, 38, 0.16);
+}
+
+/* === ДОСКА УЛИК / ЗАМЕТКИ (МЕНТАЛИСТ) === */
+.note-card {
+    position: relative;
+    background: linear-gradient(170deg, #1b1716 0%, #131010 100%);
+    border: 1px solid #44332d;
+    border-top: 3px solid #b91c1c;
+    border-radius: 4px;
+    padding: 18px 16px 14px;
+    font-family: "Courier New", Courier, monospace;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.75);
+    transform: rotate(-0.6deg);
+}
+
+.note-card:nth-child(even) { transform: rotate(0.7deg); }
+
+.note-card::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fca5a5, #dc2626 55%, #450a0a);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+.note-card::after {
+    content: "УЛИКА КБР";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #ef4444;
+    border: 1.5px solid #991b1b;
+    padding: 2px 5px;
+    transform: rotate(2.5deg);
+    opacity: 0.85;
+}
+
+.note-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 5px;
+    padding-right: 95px;
+    text-transform: uppercase;
+}
+
+.note-date {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.note-body {
+    font-size: 0.89rem;
+    line-height: 1.48;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+    user-select: text;
+    margin-bottom: 12px;
+}
+
+/* === НИЖНИЙ БЛОК ПАТРИКА ДЖЕЙНА (3D МАСТИ) === */
+.jane-footer {
+    margin-top: auto;
+    padding: 18px 22px 24px;
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+    border-top: 1px solid rgba(217, 119, 6, 0.2);
+    background: linear-gradient(180deg, transparent, rgba(12, 14, 19, 0.92));
+}
+
+.jane-divider {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.suit-chip {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.suit-dark {
+    background: linear-gradient(145deg, #272b36, #13161c);
+    border: 1px solid #3f4656;
+    color: #e2e8f0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.suit-red {
+    background: linear-gradient(145deg, #991b1b, #450a0a);
+    border: 1px solid #dc2626;
+    color: #fecaca;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
+}
+
+.jane-quote {
+    font-size: 0.78rem;
+    line-height: 1.48;
+    color: #94a3b8;
+    font-style: italic;
+    margin-bottom: 6px;
+}
+
+.jane-sign {
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+    color: #f59e0b;
+    font-weight: 700;
+}
+
+/* === ТЕМА ФЕЙКА: FBI === */
+#vault-screen.fbi-theme { background: #070b14; background-image: none; }
+.fbi-theme .vault-header { background: #0b1222; border-bottom: 1px solid #1e3a8a; box-shadow: none; }
+.fbi-theme .tea-badge, .fbi-theme .jane-footer { display: none; }
+.fbi-theme #vault-mode-label { color: #60a5fa; }
+.fbi-theme .vault-sub { color: #93c5fd; }
+.fbi-theme .icon-btn { background: #0f172a; border-color: #1d4ed8; color: #60a5fa; }
+.fbi-theme .tab-btn.active { background: rgba(37, 99, 235, 0.15); border-color: #3b82f6; color: #93c5fd; box-shadow: none; }
+.fbi-theme .add-btn { border-color: #1d4ed8; background: transparent; color: #60a5fa; }
+.fbi-theme .pass-card { background: #0c1426; border-color: #1e3a8a; border-left: 3px solid #3b82f6; box-shadow: none; }
+.fbi-theme .pass-card::after { display: none; }
+.fbi-theme .pass-row { background: #070b14; border-color: #1e293b; }
+.fbi-theme .mini-btn { background: #172554; border-color: #1d4ed8; color: #93c5fd; }
+.fbi-theme .mini-btn.del { background: rgba(220, 38, 38, 0.2); color: #fca5a5; border-color: rgba(220, 38, 38, 0.4); }
+.fbi-theme .note-card { background: #0b1220; border-color: #1e3a8a; border-left: 4px solid #2563eb; transform: none; box-shadow: none; }
+.fbi-theme .note-card::before { display: none; }
+.fbi-theme .note-card::after { content: "FBI // PUBLIC"; background: transparent; color: #60a5fa; border: 1px solid #1d4ed8; transform: none; }
+.fbi-theme .note-title { color: #93c5fd; }
+.fbi-theme .note-date { color: #64748b; }
+
+/* === ЭКРАН БЭКАПА: RED JOHN (777+777) === */
+#backup-screen.redjohn-theme {
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 20px;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(153, 27, 27, 0.28) 0%, transparent 65%),
+        repeating-linear-gradient(45deg, #090303 0px, #090303 2px, #0d0404 3px, #0d0404 6px);
+}
+
+.rj-badges { display: flex; gap: 16px; }
+.rj-mini {
+    width: 30px; height: 30px; fill: none; stroke: #b91c1c; stroke-width: 7; stroke-linecap: round;
+    filter: url(#blood-smear) drop-shadow(0 0 6px rgba(220, 38, 38, 0.7));
+}
+.rj-mini circle { fill: #b91c1c; stroke: none; }
+.rj-smiley { filter: url(#blood-smear) drop-shadow(0 2px 12px rgba(185, 28, 28, 0.9)); }
+
+.rj-box {
+    width: 100%; max-width: 360px; background: rgba(14, 4, 4, 0.92); border: 1px solid #7f1d1d;
+    box-shadow: 0 0 35px rgba(153, 27, 27, 0.35); border-radius: 14px; padding: 20px 22px;
+    display: flex; flex-direction: column; align-items: center; gap: 11px; text-align: center;
+}
+.rj-box h2 { font-family: "Courier New", Courier, monospace; font-size: 1.15rem; letter-spacing: 2px; color: #dc2626; }
+.rj-box p { font-size: 0.82rem; color: #a1a1aa; line-height: 1.4; }
+.backup-action-btn {
+    width: 100%; display: block; padding: 13px; border-radius: 9px; border: none;
+    background: #991b1b; color: #fff; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+}
+.backup-action-btn.secondary { background: #180808; border: 1px solid #7f1d1d; color: #fca5a5; }
+.backup-exit-btn { padding: 6px; background: transparent; border: none; color: #71717a; font-size: 0.84rem; cursor: pointer; }
+.rj-quote {
+    font-family: "Courier New", Courier, monospace; font-size: 0.8rem; line-height: 1.55;
+    color: #dc2626; text-align: center; text-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
+}
+
+/* Модалки */
+.modal-content {
+    width: 100%; max-width: 360px; background: #151820; border: 1.5px solid #d97706;
+    border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;
+}
+.modal-content.detective-modal { background: #171310; border-color: #b91c1c; font-family: "Courier New", Courier, monospace; }
+.modal-content input, .modal-content textarea {
+    width: 100%; padding: 11px 12px; border-radius: 9px; border: 1px solid #282d38;
+    background: #0b0d11; color: #fff; font-size: 0.92rem; user-select: text;
+}
+.modal-actions { display: flex; gap: 10px; }
+.modal-actions button { flex: 1; padding: 11px; border-radius: 9px; border: none; font-weight: 700; cursor: pointer; }
+.btn-cancel { background: #282d38; color: #94a3b8; }
+.btn-save { background: #d97706; color: #fff; }
+.detective-modal .btn-save { background: #b91c1c; color: #fff; }
+/* END_CSS */

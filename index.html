@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0d0d0f">
+    <title>Калькулятор</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="calc.css">
+    <link rel="stylesheet" href="vault.css?v=8">
+</head>
+<body>
+
+    <main id="calc-screen" class="screen active">
+        <div class="calc-display-box">
+            <div id="calc-history" class="calc-history"></div>
+            <div id="calc-display" class="calc-display">0</div>
+        </div>
+        <div class="calc-keypad">
+            <button class="btn fn" data-action="clear">C</button>
+            <button class="btn fn" data-val="(">(</button>
+            <button class="btn fn" data-val=")">)</button>
+            <button class="btn op" data-val="/">÷</button>
+            <button class="btn num" data-val="7">7</button>
+            <button class="btn num" data-val="8">8</button>
+            <button class="btn num" data-val="9">9</button>
+            <button class="btn op" data-val="*">×</button>
+            <button class="btn num" data-val="4">4</button>
+            <button class="btn num" data-val="5">5</button>
+            <button class="btn num" data-val="6">6</button>
+            <button class="btn op" data-val="-">−</button>
+            <button class="btn num" data-val="1">1</button>
+            <button class="btn num" data-val="2">2</button>
+            <button class="btn num" data-val="3">3</button>
+            <button class="btn op" data-val="+">+</button>
+            <button class="btn num" data-val="0">0</button>
+            <button class="btn num" data-val=".">.</button>
+            <button class="btn fn" data-action="backspace">⌫</button>
+            <button class="btn eq" data-action="equals">=</button>
+        </div>
+    </main>
+
+    <section id="vault-screen" class="screen">
+        <header class="vault-header">
+            <div class="vault-status">
+                <svg class="tea-badge" viewBox="0 0 64 64" width="42" height="42">
+                    <defs>
+                        <linearGradient id="cup-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="60%" stop-color="#cbd5e1"/>
+                            <stop offset="100%" stop-color="#64748b"/>
+                        </linearGradient>
+                        <linearGradient id="tea-liquid" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#92400e"/>
+                            <stop offset="50%" stop-color="#f59e0b"/>
+                            <stop offset="100%" stop-color="#b45309"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M24 15 C22 10, 27 8, 25 3" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+                    <path d="M33 14 C31 9, 36 7, 34 2" fill="none" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+                    <ellipse cx="30" cy="51" rx="22" ry="5" fill="#334155" stroke="#94a3b8" stroke-width="1.2"/>
+                    <ellipse cx="30" cy="50" rx="16" ry="3" fill="#0f172a"/>
+                    <path d="M44 27 C52 27, 54 31, 54 35 C54 39, 51 42, 43 42" fill="none" stroke="url(#cup-grad)" stroke-width="3.5" stroke-linecap="round"/>
+                    <path d="M14 23 H46 C46 39, 40 48, 30 48 C20 48, 14 39, 14 23 Z" fill="url(#cup-grad)"/>
+                    <ellipse cx="30" cy="23" rx="16" ry="4.5" fill="url(#tea-liquid)" stroke="#fef3c7" stroke-width="1"/>
+                    <path d="M21 24 Q17 28 18 35" fill="none" stroke="#e2e8f0" stroke-width="1.2"/>
+                    <polygon points="15,35 21,35 22,42 14,42" fill="#d97706" stroke="#fef3c7" stroke-width="0.8"/>
+                </svg>
+                <div>
+                    <div id="vault-mode-label">КОНСУЛЬТАНТ КБР</div>
+                    <div id="vault-sub-label" class="vault-sub">ЧАЙНЫЙ АРХИВ // ДОПУСК №1</div>
+                </div>
+            </div>
+            <button id="lock-vault-btn" class="icon-btn">✕</button>
+        </header>
+
+        <nav class="vault-tabs">
+            <button id="tab-passwords" class="tab-btn active">КЛЮЧИ ДОСТУПА</button>
+            <button id="tab-notes" class="tab-btn">ДОСКА УЛИК</button>
+        </nav>
+
+        <div id="section-passwords" class="vault-section active">
+            <button id="open-pass-modal" class="add-btn">+ Добавить ключ в архив</button>
+            <div id="passwords-list" class="cards-container"></div>
+        </div>
+
+        <div id="section-notes" class="vault-section">
+            <button id="open-note-modal" class="add-btn detective">+ Прикрепить улику к делу</button>
+            <div id="notes-list" class="notes-container"></div>
+        </div>
+
+        <footer id="jane-footer" class="jane-footer">
+            <div class="jane-divider">
+                <span class="suit-chip suit-dark">♠</span>
+                <span class="suit-chip suit-red">♥</span>
+                <span class="suit-chip suit-red">♦</span>
+                <span class="suit-chip suit-dark">♣</span>
+            </div>
+            <p class="jane-quote">"There is no such thing as mentalists. I just pay attention."</p>
+            <span class="jane-sign">— PATRICK JANE</span>
+        </footer>
+    </section>
+
+    <section id="backup-screen" class="screen redjohn-theme">
+        <svg width="0" height="0" style="position:absolute">
+            <filter id="blood-smear">
+                <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </svg>
+
+        <div class="rj-badges">
+            <svg class="rj-mini" viewBox="0 0 100 100"><path d="M50 10 C77 8, 92 27, 90 52 C88 77, 69 91, 47 90 C23 89, 8 70, 10 47 C12 24, 28 12, 50 10 Z"/><circle cx="33" cy="39" r="6"/><circle cx="67" cy="37" r="6"/><path d="M22 55 C32 78, 68 77, 78 52"/></svg>
+            <svg class="rj-mini" viewBox="0 0 100 100"><path d="M50 10 C77 8, 92 27, 90 52 C88 77, 69 91, 47 90 C23 89, 8 70, 10 47 C12 24, 28 12, 50 10 Z"/><circle cx="33" cy="39" r="6"/><circle cx="67" cy="37" r="6"/><path d="M22 55 C32 78, 68 77, 78 52"/></svg>
+            <svg class="rj-mini" viewBox="0 0 100 100"><path d="M50 10 C77 8, 92 27, 90 52 C88 77, 69 91, 47 90 C23 89, 8 70, 10 47 C12 24, 28 12, 50 10 Z"/><circle cx="33" cy="39" r="6"/><circle cx="67" cy="37" r="6"/><path d="M22 55 C32 78, 68 77, 78 52"/></svg>
+            <svg class="rj-mini" viewBox="0 0 100 100"><path d="M50 10 C77 8, 92 27, 90 52 C88 77, 69 91, 47 90 C23 89, 8 70, 10 47 C12 24, 28 12, 50 10 Z"/><circle cx="33" cy="39" r="6"/><circle cx="67" cy="37" r="6"/><path d="M22 55 C32 78, 68 77, 78 52"/></svg>
+            <svg class="rj-mini" viewBox="0 0 100 100"><path d="M50 10 C77 8, 92 27, 90 52 C88 77, 69 91, 47 90 C23 89, 8 70, 10 47 C12 24, 28 12, 50 10 Z"/><circle cx="33" cy="39" r="6"/><circle cx="67" cy="37" r="6"/><path d="M22 55 C32 78, 68 77, 78 52"/></svg>
+        </div>
+
+        <div class="backup-box rj-box">
+            <svg class="rj-smiley" viewBox="0 0 100 120" width="96" height="112">
+                <path d="M51 9 C80 6, 95 27, 92 53 C90 79, 71 93, 47 92 C21 91, 6 71, 8 47 C10 23, 28 11, 51 9 Z" fill="none" stroke="#b91c1c" stroke-width="8" stroke-linecap="round"/>
+                <circle cx="32" cy="39" r="5.5" fill="#b91c1c"/>
+                <circle cx="68" cy="37" r="6" fill="#b91c1c"/>
+                <path d="M20 55 C31 80, 70 79, 80 51" fill="none" stroke="#b91c1c" stroke-width="8" stroke-linecap="round"/>
+                <path d="M49 74 L49 91 M76 61 L76 84 M28 89 L28 112 M62 88 L62 102" stroke="#991b1b" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <h2>RED JOHN // ARCHIVE</h2>
+            <p>Зашифрованный слепок базы. Без мастер-кода внутри только кровь и шум.</p>
+            <button id="export-btn" class="backup-action-btn">Скачать базу (.json)</button>
+            <label class="backup-action-btn secondary">
+                Восстановить из файла
+                <input type="file" id="import-input" accept=".json" hidden>
+            </label>
+            <button id="close-backup-btn" class="backup-exit-btn">Вернуться в калькулятор</button>
+        </div>
+
+        <div class="rj-quote">
+            «Тигр, тигр, жгучий страх,<br>
+            Ты горишь в ночных лесах.<br>
+            Чей бессмертный взор, любя,<br>
+            Создал страшного  тебя?»
+        </div>
+    </section>
+
+    <div id="modal-password" class="modal">
+        <div class="modal-content">
+            <h3>НОВЫЙ КЛЮЧ ДОСТУПА</h3>
+            <input type="text" id="pass-service" placeholder="Сервис">
+            <input type="text" id="pass-login" placeholder="Логин или почта">
+            <input type="text" id="pass-secret" placeholder="Пароль или ключ">
+            <div class="modal-actions">
+                <button id="cancel-pass-btn" class="btn-cancel">Отмена</button>
+                <button id="save-pass-btn" class="btn-save">Зашифровать</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-note" class="modal">
+        <div class="modal-content detective-modal">
+            <h3>ЗАПИСЬ В ДЕЛО</h3>
+            <input type="text" id="note-title" placeholder="Тема / Заголовок">
+            <textarea id="note-body" rows="5" placeholder="Текст заметки..."></textarea>
+            <div class="modal-actions">
+                <button id="cancel-note-btn" class="btn-cancel">Закрыть</button>
+                <button id="save-note-btn" class="btn-save">Пришить к делу</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="crypto.js?v=3"></script>
+    <script src="app.js?v=6"></script>
+</body>
+</html>
+<!-- END_HTML -->
