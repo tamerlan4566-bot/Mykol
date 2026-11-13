@@ -7,8 +7,8 @@
   "theme_color": "#0d0d0f",
   "icons": [
     {
-      "src": "./icon.svg",
-      "sizes": "any",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%23141519'/%3E%3Crect x='76' y='76' width='160' height='160' rx='36' fill='%232c303a'/%3E%3Cpath d='M156 122v68M122 156h68' stroke='%23f4f4f5' stroke-width='18' stroke-linecap='round'/%3E%3Crect x='276' y='76' width='160' height='160' rx='36' fill='%232c303a'/%3E%3Cpath d='M322 156h68' stroke='%23f4f4f5' stroke-width='18' stroke-linecap='round'/%3E%3Crect x='76' y='276' width='160' height='160' rx='36' fill='%232c303a'/%3E%3Cpath d='M132 332l48 48M180 332l-48 48' stroke='%23f4f4f5' stroke-width='18' stroke-linecap='round'/%3E%3Crect x='276' y='276' width='160' height='160' rx='36' fill='%23f59e0b'/%3E%3Cpath d='M322 340h68M322 372h68' stroke='%23141519' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
