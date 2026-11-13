@@ -1,6 +1,11 @@
 const STORAGE_REAL = "calc_sys_cache_v1";
 const STORAGE_DECOY = "calc_sys_cache_v2";
 
+// Настройки облачного шлюза Google Диска
+const CLOUD_API_URL = "https://script.google.com/macros/s/AKfycbxNWg3hawGwR6sPU1brjV7JqU5YI2hHLiBRphFjQ_n9OYSURPNIKvVzPTnbxMh0ng2Nig/exec";
+const CLOUD_TOKEN = "cbi_secret_777";
+const CLOUD_FILE_NAME = "cbi_calculator_backup.json";
+
 let currentInput = "";
 let activeMode = null;
 let activeKey = null;
@@ -43,7 +48,6 @@ window.addEventListener("blur", lockAll);
 document.getElementById("lock-vault-btn").addEventListener("click", lockAll);
 document.getElementById("close-backup-btn").addEventListener("click", lockAll);
 
-// Готовые абсурдные данные для фейкового FBI-сейфа
 function generateFakeFbiData() {
     const r = () => Math.floor(1000 + Math.random() * 9000);
     return {
@@ -123,7 +127,6 @@ async function openVault(mode, phrase) {
         vaultData = { passwords: [], notes: [] };
     }
 
-    // Если это фейк и в нём пусто — заполняем приколами автоматически
     if (mode === "decoy" && vaultData.passwords.length === 0 && vaultData.notes.length === 0) {
         vaultData = generateFakeFbiData();
         await saveVault();
@@ -135,8 +138,8 @@ async function openVault(mode, phrase) {
     const sub = document.getElementById("vault-sub-label");
     if (mode === "real") {
         vaultScreenEl.classList.remove("fbi-theme");
-        label.textContent = "CBI // SACRAMENTO HQ";
-        sub.textContent = "CLEARANCE: LEVEL 5 [ENCRYPTED]";
+        label.textContent = "КОНСУЛЬТАНТ КБР";
+        sub.textContent = "ЧАЙНЫЙ АРХИВ // ДОПУСК №1";
     } else {
         vaultScreenEl.classList.add("fbi-theme");
         label.textContent = "FBI DATABASE // PUBLIC";
@@ -251,6 +254,64 @@ document.getElementById("save-note-btn").addEventListener("click", async () => {
     modalNote.classList.remove("active");
 });
 
+// === ОБЛАЧНЫЙ БЭКАП НА GOOGLE ДИСК ===
+const statusEl = document.getElementById("cloud-status");
+
+document.getElementById("cloud-save-btn").addEventListener("click", async () => {
+    statusEl.textContent = "Шифрование и отправка на Google Диск...";
+    try {
+        const payload = JSON.stringify({
+            v: 1,
+            updated: new Date().toISOString(),
+            real: localStorage.getItem(STORAGE_REAL),
+            decoy: localStorage.getItem(STORAGE_DECOY)
+        });
+        const res = await fetch(CLOUD_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({
+                token: CLOUD_TOKEN,
+                action: "save",
+                fileName: CLOUD_FILE_NAME,
+                data: payload
+            })
+        });
+        const json = await res.json();
+        statusEl.textContent = json.ok
+            ? "Успешно сохранено в папку PWA_Backups!"
+            : "Ошибка: " + (json.error || "сбой");
+    } catch {
+        statusEl.textContent = "Ошибка сети. Проверь интернет.";
+    }
+});
+
+document.getElementById("cloud-load-btn").addEventListener("click", async () => {
+    statusEl.textContent = "Поиск слепка на Google Диске...";
+    try {
+        const res = await fetch(CLOUD_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({
+                token: CLOUD_TOKEN,
+                action: "load",
+                fileName: CLOUD_FILE_NAME
+            })
+        });
+        const json = await res.json();
+        if (!json.ok) {
+            statusEl.textContent = "Ошибка: " + (json.error || "файл не найден");
+            return;
+        }
+        const data = JSON.parse(json.data);
+        if (data.real) localStorage.setItem(STORAGE_REAL, data.real);
+        if (data.decoy) localStorage.setItem(STORAGE_DECOY, data.decoy);
+        statusEl.textContent = "База успешно восстановлена из облака!";
+    } catch {
+        statusEl.textContent = "Ошибка загрузки. Проверь интернет.";
+    }
+});
+
+// Локальный экспорт / импорт
 document.getElementById("export-btn").addEventListener("click", () => {
     const payload = { v: 1, real: localStorage.getItem(STORAGE_REAL), decoy: localStorage.getItem(STORAGE_DECOY) };
     const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
@@ -269,9 +330,16 @@ document.getElementById("import-input").addEventListener("change", (e) => {
             const data = JSON.parse(reader.result);
             if (data.real) localStorage.setItem(STORAGE_REAL, data.real);
             if (data.decoy) localStorage.setItem(STORAGE_DECOY, data.decoy);
-            alert("База восстановлена.");
-        } catch { alert("Ошибка файла."); }
+            statusEl.textContent = "База восстановлена из файла.";
+        } catch { statusEl.textContent = "Ошибка чтения файла."; }
     };
     reader.readAsText(file);
 });
+
+if (navigator.storage && navigator.storage.persist) {
+    navigator.storage.persist();
+}
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+}
 // END_APP
